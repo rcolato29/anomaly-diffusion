@@ -1,0 +1,9 @@
+{
+    "threshold": 0.1151981285445028,
+    "far": 0.01,
+    "level": 0.9,
+    "n_reference": 128,
+    "ref_mean": 0.06784383856575005,
+    "ref_std": 0.01581946532612945,
+    "category": "bottle"
+}
