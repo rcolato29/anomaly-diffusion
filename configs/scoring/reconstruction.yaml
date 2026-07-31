@@ -1,0 +1,11 @@
+name: reconstruction
+t_stars: [0.1, 0.25, 0.4]
+n_steps: 5
+solver: ddim # ddim | pf_ode
+probability_flow: true
+smooth_sigma: 4.0
+image_score: max # max | mean | topk
+topk_frac: 0.01
+evt_far: 0.01
+evt_level: 0.9
+threshold: null
