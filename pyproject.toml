@@ -1,0 +1,54 @@
+[project]
+name = "anomaly-diffusion"
+version = "0.1.0"
+description = "Score-based diffusion anomaly detection via the SDE framework"
+readme = "README.md"
+requires-python = ">=3.12"
+license = "MIT"
+license-files = ["LICENSE"]
+authors = [{ name = "Rudy Colato", email = "rudycolato29@gmail.com" }]
+dependencies = [
+    "torch>=2.4",
+    "torchvision>=0.19",
+    "diffusers>=0.30",
+    "hydra-core>=1.3",
+    "wandb>=0.17",
+    "numpy>=1.26",
+    "pillow>=10.0",
+    "tqdm>=4.66",
+    "scikit-learn>=1.4", # AUROC and other metrics
+    "torchdiffeq>=0.2.4", # PF-ODE integration for exact likelihood
+    "matplotlib>=3.8", # reliability-study histograms
+    "fastapi>=0.110", # serving
+    "uvicorn[standard]>=0.29", # ASGI server for the service
+    "python-multipart>=0.0.9", # multipart/form-data image uploads
+    "structlog>=24.1", # structured request/inference logging
+    "prometheus-client>=0.20", # /metrics endpoint
+]
+
+[project.optional-dependencies]
+dev = [
+    "ruff>=0.6", # lint + format
+    "pytest>=8.0",
+    "pre-commit>=3.8",
+    "modal>=0.64", # launches GPU training
+    "gradio>=4.0", # interactive upload-image -> heatmap demo
+]
+
+[build-system]
+requires = ["uv_build>=0.8.3,<0.9.0"]
+build-backend = "uv_build"
+
+[tool.ruff]
+line-length = 100
+target-version = "py312"
+
+[tool.ruff.lint]
+select = ["E", "F", "I", "UP", "B"]
+
+[tool.ruff.lint.per-file-ignores]
+"src/anomaly_diffusion/serving/app.py" = ["B008"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
+addopts = "-q"
