@@ -1,0 +1,34 @@
+services:
+    api:
+        build: .
+        ports:
+            - "8000:8000"
+        environment:
+            MODEL_CHECKPOINT: /models/last.pt
+            ANOMALY_CONFIG_DIR: /app/configs
+            ANOMALY_CALIBRATION: /app/configs/serving/bottle.json
+        volumes:
+            - ./models:/models:ro
+
+    prometheus:
+        image: prom/prometheus:latest
+        ports:
+            - "9090:9090"
+        volumes:
+            - ./docker/prometheus/prometheus.yml:/etc/prometheus/prometheus.yml:ro
+        depends_on:
+            - api
+
+    grafana:
+        image: grafana/grafana:latest
+        ports:
+            - "${GRAFANA_PORT:-3000}:3000"
+        environment:
+            GF_AUTH_ANONYMOUS_ENABLED: "true"
+            GF_AUTH_ANONYMOUS_ORG_ROLE: Admin
+            GF_SECURITY_ADMIN_PASSWORD: admin
+        volumes:
+            - ./docker/grafana/provisioning:/etc/grafana/provisioning:ro
+            - ./docker/grafana/dashboards:/var/lib/grafana/dashboards:ro
+        depends_on:
+            - prometheus

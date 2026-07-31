@@ -1,0 +1,93 @@
+{
+    "uid": "anomaly-diffusion",
+    "title": "anomaly-diffusion - ML service",
+    "schemaVersion": 39,
+    "version": 1,
+    "editable": true,
+    "refresh": "5s",
+    "time": { "from": "now-15m", "to": "now" },
+    "panels": [
+        {
+            "id": 1,
+            "type": "timeseries",
+            "title": "Predict latency (p50 / p95)",
+            "gridPos": { "h": 8, "w": 12, "x": 0, "y": 0 },
+            "datasource": { "type": "prometheus", "uid": "prometheus" },
+            "fieldConfig": { "defaults": { "unit": "s" }, "overrides": [] },
+            "targets": [
+                {
+                    "refId": "A",
+                    "datasource": { "type": "prometheus", "uid": "prometheus" },
+                    "expr": "histogram_quantile(0.5, sum(rate(predict_latency_seconds_bucket[5m])) by (le))",
+                    "legendFormat": "p50"
+                },
+                {
+                    "refId": "B",
+                    "datasource": { "type": "prometheus", "uid": "prometheus" },
+                    "expr": "histogram_quantile(0.95, sum(rate(predict_latency_seconds_bucket[5m])) by (le))",
+                    "legendFormat": "p95"
+                }
+            ]
+        },
+        {
+            "id": 2,
+            "type": "timeseries",
+            "title": "Throughput (images/sec)",
+            "gridPos": { "h": 8, "w": 12, "x": 12, "y": 0 },
+            "datasource": { "type": "prometheus", "uid": "prometheus" },
+            "fieldConfig": { "defaults": { "unit": "iops" }, "overrides": [] },
+            "targets": [
+                {
+                    "refId": "A",
+                    "datasource": { "type": "prometheus", "uid": "prometheus" },
+                    "expr": "rate(predict_images_total[1m])",
+                    "legendFormat": "images/s"
+                }
+            ]
+        },
+        {
+            "id": 3,
+            "type": "stat",
+            "title": "Active NFE (speed/quality operating point)",
+            "gridPos": { "h": 8, "w": 6, "x": 0, "y": 8 },
+            "datasource": { "type": "prometheus", "uid": "prometheus" },
+            "fieldConfig": { "defaults": { "unit": "none" }, "overrides": [] },
+            "targets": [
+                {
+                    "refId": "A",
+                    "datasource": { "type": "prometheus", "uid": "prometheus" },
+                    "expr": "active_nfe",
+                    "legendFormat": "NFE"
+                }
+            ]
+        },
+        {
+            "id": 4,
+            "type": "timeseries",
+            "title": "Input drift z-score (model-native, alert at |z| >= 3)",
+            "gridPos": { "h": 8, "w": 18, "x": 6, "y": 8 },
+            "datasource": { "type": "prometheus", "uid": "prometheus" },
+            "fieldConfig": {
+                "defaults": {
+                    "unit": "none",
+                    "thresholds": {
+                        "mode": "absolute",
+                        "steps": [
+                            { "color": "green", "value": null },
+                            { "color": "red", "value": 3 }
+                        ]
+                    }
+                },
+                "overrides": []
+            },
+            "targets": [
+                {
+                    "refId": "A",
+                    "datasource": { "type": "prometheus", "uid": "prometheus" },
+                    "expr": "input_drift_z",
+                    "legendFormat": "drift z"
+                }
+            ]
+        }
+    ]
+}

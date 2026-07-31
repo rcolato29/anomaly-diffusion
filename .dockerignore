@@ -1,0 +1,15 @@
+.git
+.venv
+outputs
+data
+models
+wandb
+multirun
+**/__pycache__
+*.pt
+*.ckpt
+.pytest_cache
+.ruff_cache
+docker
+docs
+tests
