@@ -1,0 +1,71 @@
+{
+    "category": "bottle",
+    "manifest": [
+        {
+            "path": "bottle/test/good/000.png",
+            "label": 0
+        },
+        {
+            "path": "bottle/test/good/001.png",
+            "label": 0
+        },
+        {
+            "path": "bottle/test/good/002.png",
+            "label": 0
+        },
+        {
+            "path": "bottle/test/good/003.png",
+            "label": 0
+        },
+        {
+            "path": "bottle/test/good/004.png",
+            "label": 0
+        },
+        {
+            "path": "bottle/test/good/005.png",
+            "label": 0
+        },
+        {
+            "path": "bottle/test/good/006.png",
+            "label": 0
+        },
+        {
+            "path": "bottle/test/good/007.png",
+            "label": 0
+        },
+        {
+            "path": "bottle/test/broken_large/000.png",
+            "label": 1
+        },
+        {
+            "path": "bottle/test/broken_large/001.png",
+            "label": 1
+        },
+        {
+            "path": "bottle/test/broken_large/002.png",
+            "label": 1
+        },
+        {
+            "path": "bottle/test/broken_large/003.png",
+            "label": 1
+        },
+        {
+            "path": "bottle/test/broken_large/004.png",
+            "label": 1
+        },
+        {
+            "path": "bottle/test/broken_large/005.png",
+            "label": 1
+        },
+        {
+            "path": "bottle/test/broken_large/006.png",
+            "label": 1
+        },
+        {
+            "path": "bottle/test/broken_large/007.png",
+            "label": 1
+        }
+    ],
+    "golden_auroc": 1.0,
+    "floor": 0.95
+}
