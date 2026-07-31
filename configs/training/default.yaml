@@ -1,0 +1,10 @@
+max_steps: 50000
+lr: 2.0e-4
+ema_decay: 0.999
+grad_clip: 1.0
+weighting: std2 # std2 | likelihood
+amp: true
+log_every: 50
+ckpt_every: 1000
+ckpt_dir: outputs/checkpoints
+resume_from: null
