@@ -1,0 +1,6 @@
+root: data/mvtec_anomaly_detection
+category: bottle
+image_size: 256
+batch_size: 16
+num_workers: 4
+augment: false

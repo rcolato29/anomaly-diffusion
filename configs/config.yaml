@@ -1,0 +1,14 @@
+defaults:
+    - data: mvtec
+    - sde: vp
+    - model: unet
+    - training: default
+    - scoring: reconstruction
+    - reliability: default
+    - tracking: wandb
+    - _self_
+
+seed: 42
+device: auto # auto -> cuda > mps > cpu
+run:
+    dir: outputs
