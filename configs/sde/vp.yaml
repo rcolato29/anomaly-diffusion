@@ -1,0 +1,5 @@
+name: vp
+beta_min: 0.1
+beta_max: 20.0
+t_min: 1.0e-5
+t_max: 1.0

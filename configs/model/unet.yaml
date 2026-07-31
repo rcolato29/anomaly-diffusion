@@ -1,0 +1,5 @@
+base_channels: 64
+channel_mults: [1, 2, 2, 4]
+layers_per_block: 2
+time_embed_scale: 999.0
+norm_num_groups: 32
